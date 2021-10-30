@@ -78,11 +78,6 @@ export const fetchConversations = () => async (dispatch) => {
   }
 };
 
-const saveMessage = async (body) => {
-  const { data } = await axios.post("/api/messages", body);
-  return data;
-};
-
 const sendMessage = (data, body) => {
   socket.emit("new-message", {
     message: data.message,
@@ -93,14 +88,16 @@ const sendMessage = (data, body) => {
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => (dispatch) => {
+export const postMessage = (body) => async (dispatch) => {
   try {
-    const data = saveMessage(body);
+    const { data } = await axios.post("/api/messages", body);
 
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
+      // after dispatching addConversation action, we need to be able to set a new message as well.
+      dispatch(setNewMessage(data.message, data.sender));
     } else {
-      dispatch(setNewMessage(data.message));
+      dispatch(setNewMessage(data.message, data.sender)); // if we have a conversation already, just dispatch a new message
     }
 
     sendMessage(data, body);
