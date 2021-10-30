@@ -6,7 +6,10 @@ import {
   addOnlineUser,
 } from "./store/conversations";
 
-const socket = io(window.location.origin);
+// const socket = io(window.location.origin);
+
+// fixes proxy error
+const socket = io("http://localhost:3001", { transports: ["websocket"] });
 
 socket.on("connect", () => {
   console.log("connected to server");
