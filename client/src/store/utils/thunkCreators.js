@@ -94,8 +94,6 @@ export const postMessage = (body) => async (dispatch) => {
 
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
-      // after dispatching addConversation action, we need to be able to set a new message as well.
-      dispatch(setNewMessage(data.message, data.sender));
     } else {
       dispatch(setNewMessage(data.message, data.sender)); // if we have a conversation already, just dispatch a new message
     }
