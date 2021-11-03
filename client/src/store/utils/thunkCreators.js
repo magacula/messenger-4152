@@ -7,6 +7,7 @@ import {
   setSearchedUsers,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
+import { sortByCreatedAt } from "../utils/sortByCreatedAt";
 
 axios.interceptors.request.use(async function (config) {
   const token = await localStorage.getItem("messenger-token");
@@ -72,6 +73,12 @@ export const logout = (id) => async (dispatch) => {
 export const fetchConversations = () => async (dispatch) => {
   try {
     const { data } = await axios.get("/api/conversations");
+
+    // sorts messages by creation date after receiving api response
+    for (let convo of data) {
+      sortByCreatedAt(convo.messages);
+    }
+
     dispatch(gotConversations(data));
   } catch (error) {
     console.error(error);
