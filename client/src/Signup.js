@@ -7,7 +7,7 @@ import { useStyles } from "./styles/styles";
 import { Form } from "./components/Form";
 import { SideBanner } from "./components/SideBanner";
 
-const Login = (props) => {
+const Signup = (props) => {
   const history = useHistory();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
@@ -119,4 +119,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
