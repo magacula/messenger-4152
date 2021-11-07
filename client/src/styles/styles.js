@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
   header: {
     fontWeight: "600",
     fontSize: "2rem",
-    margin: "auto auto auto 0",
+    margin: theme.spacing("auto", "auto", "auto", 0),
 
     [theme.breakpoints.down("sm")]: {
       margin: "auto",
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     border: 0,
     padding: "10px 40px",
     marginTop: "1rem",
-    fontFamily: `'Montserrat', 'sans-serif'`,
+    fontFamily: theme.typography.button.fontFamily,
   },
 
   btnContainer: {
@@ -68,7 +68,8 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   form: {
-    margin: "auto auto auto 0",
+    margin: theme.spacing("auto", "auto", "auto", 0),
+
     [theme.breakpoints.down("sm")]: {
       margin: "auto",
     },
@@ -79,8 +80,8 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   smGrayText: {
-    color: "#B0B0B0",
-    fontSize: "14px",
+    color: theme.palette.smallTextColor.main,
+    fontSize: theme.typography.fontSize,
     marginTop: "1rem",
   },
 
@@ -120,7 +121,6 @@ export const useStyles = makeStyles((theme) => ({
   sloganText: {
     fontSize: "1.75rem",
     textAlign: "center",
-    color: "#fff",
-    fontWeight: "600",
+    color: theme.typography.color,
   },
 }));

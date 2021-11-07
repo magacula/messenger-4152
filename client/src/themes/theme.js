@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createTheme } from "@material-ui/core";
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
     fontSize: 14,
@@ -8,7 +8,9 @@ export const theme = createMuiTheme({
       textTransform: "none",
       letterSpacing: 0,
       fontWeight: "bold",
+      fontFamily: `'Montserrat', 'sans-serif'`,
     },
+    color: "#fff",
   },
   overrides: {
     MuiInput: {
@@ -22,6 +24,9 @@ export const theme = createMuiTheme({
     secondary: {
       main: "#fff",
       contrastText: "#3A8DFF",
+    },
+    smallTextColor: {
+      main: "#B0B0B0",
     },
   },
 });
