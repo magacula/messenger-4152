@@ -22,9 +22,7 @@ export const Form = ({ onSubmit, inputs, buttonText, greetingText }) => {
             {inputs.map((input) => {
               return (
                 <Grid key={input.id}>
-                  <FormControl
-                    className={classes.formCtrl}
-                    error={input.error ? input.error : undefined}>
+                  <FormControl className={classes.formCtrl} error={input.error}>
                     <Typography className={classes.smGrayText}>
                       {input.labelHeading}
                     </Typography>
@@ -33,10 +31,8 @@ export const Form = ({ onSubmit, inputs, buttonText, greetingText }) => {
                       aria-label={input.ariaLabel}
                       name={input.name}
                       type={input.type}
-                      required={input.required ? { required: true } : undefined}
-                      inputProps={
-                        input.inputProps ? input.inputProps : undefined
-                      }
+                      required={input.required}
+                      inputProps={input.inputProps}
                     />
                     {input.formHelperText && (
                       <FormHelperText>{input.formHelperText}</FormHelperText>
