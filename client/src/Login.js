@@ -1,19 +1,35 @@
 import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-} from "@material-ui/core";
+import { Grid, Box, Typography, Button } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import { useStyles } from "./styles/styles";
+import { Form } from "./components/Form";
+import { SideBanner } from "./components/SideBanner";
 
 const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
+  const classes = useStyles(props);
+
+  const loginInputs = [
+    {
+      id: "input0",
+      labelHeading: "Username",
+      ariaLabel: "username",
+      name: "username",
+      type: "text",
+      required: true,
+    },
+    {
+      id: "input1",
+      labelHeading: "Password",
+      ariaLabel: "password",
+      name: "password",
+      type: "password",
+      required: true,
+    },
+  ];
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -28,40 +44,31 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
+    <Grid spacing={0} className={classes.outerFlexContainer}>
+      <SideBanner />
+      <Grid item className={classes.rightSection}>
+        <Box>
+          <Grid container item className={classes.topContainer}>
+            <Typography className={classes.smGrayText}>
+              Need to register?
+            </Typography>
+            <Button
+              color="secondary"
+              variant="contained"
+              size="large"
+              className={classes.button}
+              onClick={() => history.push("/register")}>
+              Register
+            </Button>
           </Grid>
-        </form>
-      </Box>
+          <Form
+            onSubmit={handleLogin}
+            inputs={loginInputs}
+            greetingText="Welcome!"
+            buttonText="Login"
+          />
+        </Box>
+      </Grid>
     </Grid>
   );
 };
