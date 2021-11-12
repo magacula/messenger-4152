@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import {
   FormControl,
   FilledInput,
@@ -35,7 +36,6 @@ const Input = (props) => {
   const { postMessage, otherUser, conversationId, user } = props;
 
   const [attachmentsList, setAttachmentsList] = useState([]);
-  const [image, setImage] = useState("");
 
   const inputRef = useRef();
 
@@ -70,23 +70,26 @@ const Input = (props) => {
     // FormData() holds form fields & their values in key/value pairs (form data)
     const formData = new FormData();
     formData.append("file", newImage);
-    formData.append("upload_preset", "l4lhhvmt");
+    formData.append("cloud_name", "dspjub0if");
+    formData.append("upload_preset", "qygqlulh");
+
+    const API_URL = "https://api.cloudinary.com/v1_1/dspjub0if/image/upload";
 
     try {
-      // uploads image data to Cloudinary server
-      const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dspjub0if/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await response.json();
+      // uploads image data to Cloudinary Server
+      const { data } = await axios({
+        url: API_URL,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        formData,
+      });
 
       attachmentsList.push(data.url); // data.url is the URL we get back from the response
       setAttachmentsList(attachmentsList);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
