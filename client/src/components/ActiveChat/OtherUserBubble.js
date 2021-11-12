@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Avatar } from "@material-ui/core";
-import { Image } from "./Image";
+import { MessageContent } from "./MessageContent";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    margin: "1rem 0",
   },
   avatar: {
     height: 30,
@@ -19,21 +20,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     marginBottom: 5,
   },
-  bubble: {
-    backgroundImage: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
-    borderRadius: "0 10px 10px 10px",
-  },
-  text: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    letterSpacing: -0.2,
-    padding: 8,
-  },
 }));
 
 const OtherUserBubble = (props) => {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const { text, time, otherUser, attachments } = props;
   return (
     <Box className={classes.root}>
@@ -45,12 +35,13 @@ const OtherUserBubble = (props) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {/* When we want to send images in our message*/}
-        {attachments !== null && <Image attachments={attachments} />}
-
-        <Box className={classes.bubble}>
-          <Typography className={classes.text}>{text}</Typography>
-        </Box>
+        <MessageContent
+          attachments={attachments}
+          text={text}
+          otherUser={otherUser}
+          time={time}
+          bubbleType="receiver"
+        />
       </Box>
     </Box>
   );

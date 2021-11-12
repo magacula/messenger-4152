@@ -17,6 +17,7 @@ const Messages = (props) => {
             text={message.text}
             time={time}
             attachments={message.attachments}
+            otherUser={otherUser}
           />
         ) : (
           <OtherUserBubble
