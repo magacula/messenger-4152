@@ -13,8 +13,8 @@ export const addMessageToStore = (state, payload) => {
 
   return state.map((convo) => {
     if (convo.id === message.conversationId) {
-      // Reducer needs to create and return an object copy to describe the new state
-      // Making a copy we update the new state w/ our new message
+      // Reducer needs to create and return an object copy to describe the new state with the previous unchanged messages
+      // Making a copy we update the new state w/ our new message, leaving the previous messages unchanged
       const convoCopy = { ...convo };
       convoCopy.messages.push(message);
       convoCopy.latestMessageText = message.text;
