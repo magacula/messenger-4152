@@ -55,7 +55,11 @@ export const MessageContent = (props) => {
       return (
         <>
           <Typography className={classes.date}>{time}</Typography>
-          <img className={classes.image} src={attachments[0]} alt="" />
+          <img
+            className={classes.image}
+            src={attachments[0]}
+            alt={attachments[0].split(".")[0]}
+          />
           <Avatar
             alt={otherUser.username}
             src={otherUser.photoUrl}
@@ -69,7 +73,11 @@ export const MessageContent = (props) => {
         <>
           <Typography className={classes.date}>{time}</Typography>
           <Box className={classes.bubble}>
-            <img className={classes.image} src={attachments[0]} alt="" />
+            <img
+              className={classes.image}
+              src={attachments[0]}
+              alt={attachments[0].split(".")[0]}
+            />
             <Typography className={classes.text}>{text}</Typography>
           </Box>
           <Avatar
@@ -88,7 +96,13 @@ export const MessageContent = (props) => {
           </Box>
           <Box className={classes.imgContainer}>
             {attachments.map((url) => {
-              return <img src={url} className={classes.image} alt="" />;
+              return (
+                <img
+                  src={url}
+                  className={classes.image}
+                  alt={attachments[0].split(".")[0]}
+                />
+              );
             })}
           </Box>
           <Typography className={classes.date}>{time}</Typography>
